@@ -1,0 +1,53 @@
+\documentclass[]{standalone}
+\usepackage{cmap}
+\usepackage[T2A]{fontenc}
+% \usepackage[utf8x]{inputenc}
+
+\usepackage[russian]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{booktabs}
+% \usetikzlibrary{matrix}
+
+\pgfkeys{/pgf/number format/.cd,fixed,precision=3}
+\pgfplotsset{
+    compat=1.3, 
+    every axis/.append style={
+    % draw=none,
+    ticks=none,
+    % scale only axis,
+    tick style={draw opacity=0},
+    axis line style={draw opacity=0},
+    height=4.7cm, width=6.4cm, ymin=0, ymax=1,
+    title style={at={(axis description cs:0.5,-0.1)},anchor=north},
+	xmin=0, xmax=1,
+	% color=black
+    }
+}
+\begin{document}
+\pgfplotstabletypeset[
+	every head row/.style={
+	before row=\toprule,after row=\midrule},
+	every last row/.style={
+	after row=\bottomrule},
+	columns={E,f},
+	% columns={E,f,E,f},
+columns/E/.style={
+	% dec sep align,
+	precision=2,
+	column name={$E_\text{см}$, В},
+},columns/f/.style={
+	% dec sep align,
+	precision=2,
+	column name={$f$, кГц},
+},
+	% display columns/0/.style={select equal part entry of={0}{2},string type},% first part of `A'
+	% display columns/1/.style={select equal part entry of={0}{2},string type},% first part of `B'
+	% display columns/2/.style={select equal part entry of={1}{2},string type},% second part of `A'
+	% display columns/3/.style={select equal part entry of={1}{2},string type},% second part of `B'
+]{../data/ef.tsv}
+\end{document}
